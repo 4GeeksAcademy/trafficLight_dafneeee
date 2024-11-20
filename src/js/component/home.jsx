@@ -1,26 +1,39 @@
-import React from "react";
 
-//include images into your bundle
-import rigoImage from "../../img/rigo-baby.jpg";
+import React, { useState } from "react";
+import "../../styles/index.css";
 
-//create your first component
+// Componente individual para cada luz
+const Light = ({ color, isActive, onClick }) => {
+  return (
+    <div
+      className={`light ${color} ${isActive ? "glow" : ""}`}
+      onClick={onClick}
+    ></div>
+  );
+};
+
 const Home = () => {
-	return (
-		<div className="text-center">
-			<h1 className="text-center mt-5">Hello Rigo!</h1>
-			<p>
-				<img src={rigoImage} />
-			</p>
-			<a href="#" className="btn btn-success">
-				If you see this green button... bootstrap is working...
-			</a>
-			<p>
-				Made by{" "}
-				<a href="http://www.4geeksacademy.com">4Geeks Academy</a>, with
-				love!
-			</p>
-		</div>
-	);
+  const [activeColor, setActiveColor] = useState("red"); // Estado para manejar el color activo
+
+  return (
+    <div className="traffic-light-container">
+      <Light
+        color="red"
+        isActive={activeColor === "red"}
+        onClick={() => setActiveColor("red")}
+      />
+      <Light
+        color="yellow"
+        isActive={activeColor === "yellow"}
+        onClick={() => setActiveColor("yellow")}
+      />
+      <Light
+        color="green"
+        isActive={activeColor === "green"}
+        onClick={() => setActiveColor("green")}
+      />
+    </div>
+  );
 };
 
 export default Home;
